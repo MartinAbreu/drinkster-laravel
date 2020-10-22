@@ -55,7 +55,7 @@ class PostController extends Controller
 
         $imagePath = request('image')->store('uploads', 'public');
 
-        $image = Image::make(public_path("storage/{$imagePath}"))->resize(600, 600, function ($constraint) {
+        $image = Image::make(storage_path("storage/{$imagePath}"))->resize(600, 600, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });

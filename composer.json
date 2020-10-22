@@ -17,7 +17,6 @@
         "laravel/telescope": "^4.1",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
-        "laravelista/comments": "^3.6",
         "ext-gd": "*"
     },
     "require-dev": {

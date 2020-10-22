@@ -80,6 +80,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
+                                <span class="pl-3">Have an account already? <a class="pl-3" href="/login"><strong>Login</strong></a></span>
                             </div>
                         </div>
                     </form>

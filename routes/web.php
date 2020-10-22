@@ -26,17 +26,14 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::post('/follow/{user}', [App\Http\Controllers\FollowsController::class, 'store']);
 
 Route::get('/feed', [App\Http\Controllers\PostController::class, 'index']);
+Route::get('/discover', [App\Http\Controllers\PostController::class, 'discover']);
 Route::get('/p/create', [App\Http\Controllers\PostController::class, 'create']);
 Route::post('/p', [App\Http\Controllers\PostController::class, 'store']);
 Route::get('/p/{post}/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('posts.edit');
 Route::get('/p/{post}', [App\Http\Controllers\PostController::class, 'show']);
 Route::patch('/p/{post}', [App\Http\Controllers\PostController::class, 'update'])->name('posts.update');
+Route::delete('/delete/p/{post}', [App\Http\Controllers\PostController::class, 'destroy'])->name('posts.destroy');
 
-Route::get('/p/delete/{post}', function ($post) {
-    $post->delete();
-
-    return redirect()->route('/');
-});
 
 Route::get('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'index'])->name('profile.show');
 Route::get('/profile/{user}/edit', [App\Http\Controllers\ProfilesController::class, 'edit'])->name('profile.edit');

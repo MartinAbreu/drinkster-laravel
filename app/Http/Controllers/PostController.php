@@ -17,13 +17,24 @@ class PostController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(User $user)
     {
         $users = auth()->user()->following()->pluck('profiles.user_id');
 
         $posts = Post::whereIn('user_id', $users)->with('user')->latest()->paginate(5);
 
-        return view('posts.index', compact('posts'));
+        $userFollowing = count(auth()->user()->following);
+
+        return view('posts.index', compact('posts', 'users', 'userFollowing'));
+    }
+
+    public function discover()
+    {
+        $users = User::all()->except(auth()->user()->id)->pluck('id');
+
+        $posts = Post::whereIn('user_id', $users)->with('user')->latest()->paginate(5);
+
+        return view('posts.discover', compact('posts'));
     }
 
     public function create()
@@ -35,18 +46,28 @@ class PostController extends Controller
     {
         //validate data before creating
         $data = request()->validate([
+            'title' => 'required',
             'caption' => 'required',
+            'ingredients' => 'required',
+            'instructions' => 'required',
             'image' => 'required|image',
         ]);
 
         $imagePath = request('image')->store('uploads', 'public');
 
-        $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
+        $image = Image::make(public_path("storage/{$imagePath}"))->resize(600, 600, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+
         $image->save();
 
         //create data by auth user
         auth()->user()->posts()->create([
+            'title' => $data['title'],
             'caption' => $data['caption'],
+            'ingredients' => $data['ingredients'],
+            'instructions' => $data['instructions'],
             'image' => $imagePath,
         ]);
 
@@ -68,7 +89,10 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
         $data = request()->validate([
+            'title' => 'required',
             'caption' => 'required',
+            'ingredients' => 'required',
+            'instructions' => 'required',
         ]);
 
         Post::find($post->id)->update($data);
@@ -76,11 +100,12 @@ class PostController extends Controller
         return redirect("/p/{$post->id}");
     }
 
-    public function destroy(\App\Models\Post $id)
+    public function destroy(\App\Models\Post $post, User $user)
     {
-        $post = Post::findOrFail($id);
+
+        $post = Post::findOrFail($post->id);
         $post->delete();
 
-        return redirect()->route('/');
+        return redirect("/profile/{$post->user_id}");
     }
 }

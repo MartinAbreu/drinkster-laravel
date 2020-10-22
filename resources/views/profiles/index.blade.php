@@ -38,21 +38,24 @@
         </div>
     </div>
     <hr class="w-75"/>
-    <div class="row pt-5">
+    <div class="row d-flex wrap pt-5">
         @foreach ($user->posts as $post)
 
-        <div class="col-4 pb-4">
-            <a href="/p/{{ $post->id }}">
-                <img src="/storage/{{ $post->image }}" class="w-100" />
-            </a>
-            <div class="d-flex align-baseline pt-3">
-                <div class="pr-2">
-                    <img src="{{ $post->user->profile->profileImage() }}" class="w-100 rounded-circle" style="max-width: 15px">
-                </div>
-                <div>
-                    <span><a href="/profile/{{ $post->user->profile->user_id }}"><strong><span class="text-dark pr-1">{{ $post->user->username }}</span></strong> </a>{{ $post->caption }}</span>
+        <div class="col-3 pb-3">
+
+            <div class="card" style="width: 16rem;">
+                <a href="/p/{{ $post->id }}">
+                    <img class="card-img-top" src="/storage/{{ $post->image }}" alt="Card image cap">
+                </a>
+                <div class="card-body">
+                <h5 class="card-title">{{ $post->title }}</h5>
+                  <p class="card-text">
+                      <span><a href="/profile/{{ $post->user->profile->user_id }}"><strong><span class="text-dark pr-1">{{ $post->user->username }}</span></strong> </a>{{ $post->caption }}</span>
+                  </p>
+                  <a href="#" class="btn btn-primary">Share</a>
                 </div>
             </div>
+
         </div>
         @endforeach
     </div>

@@ -1,10 +1,12 @@
 @component('mail::message')
-# Introduction
+# Welcome to Drinkster
 
-The body of your message.
+Thank you for joining!
+Start sharing your favorite drinks or
+discover other Drinksters.
 
 @component('mail::button', ['url' => ''])
-Button Text
+Discover
 @endcomponent
 
 Thanks,<br>

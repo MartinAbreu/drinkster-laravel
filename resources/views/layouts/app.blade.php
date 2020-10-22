@@ -58,11 +58,11 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/profile/{{ Auth::user()->id }}">Profile</a>
+                                <hr class="w-75"/>
                                 <a class="dropdown-item" href="/feed">Feed</a>
                                 <hr class="w-75"/>
-                                <a class="dropdown-item" href="/profile/{{ Auth::user()->id }}">
-                                    Profile
-                                </a>
+                                <a class="dropdown-item" href="/discover">Discover</a>
                                 <hr class="w-75"/>
                                 <a class="dropdown-item" href="/p/create">Add New Post</a>
                                 <hr class="w-75"/>

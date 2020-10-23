@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-6 offset-1">
             <img src="https://drinkster-images.s3-us-west-1.amazonaws.com/uploads/{{ $post->image }}" class="w-100">

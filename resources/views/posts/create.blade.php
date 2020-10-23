@@ -47,7 +47,7 @@
                 <div class="form-group row">
                     <label for="instructions" class="col-md-4 col-form-label">Instructions</label>
 
-                    <textarea id="instructions" type="textarea" class="form-control @error('instructions') is-invalid @enderror" name="instructions" value="{{ old('instructions') ?? $post->instructions ?? '' }}" autocomplete="instructions" maxlength="75" autofocus></textarea>
+                    <textarea id="instructions" type="textarea" class="form-control @error('instructions') is-invalid @enderror" name="instructions" value="{{ old('instructions') ?? $post->instructions ?? '' }}" autocomplete="instructions" maxlength="255" autofocus></textarea>
 
                     @error('instructions')
                     <span class="invalid-feedback" role="alert">

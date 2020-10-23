@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Intervention\Image\Facades\Image as Image;
 use Illuminate\Support\Facades\Cache as Cache;
-
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProfilesController extends Controller
 {
@@ -35,7 +35,7 @@ class ProfilesController extends Controller
         return view('profiles.edit', compact('user'));
     }
 
-    public function update(\App\Models\User $user)
+    public function update(\App\Models\User $user, Request $request)
     {
         $data = request()->validate([
             'title' => 'required',
@@ -45,12 +45,26 @@ class ProfilesController extends Controller
         ]);
 
         if (request('image')) {
-            $imagePath = request('image')->store('profile', 'public');
+            $file = $request->file('image');
 
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit(1000, 1000);
-            $image->save();
+            $imageName = uniqid(date('YmdHis')) . '.' . $file->getClientOriginalName();
 
-            $imageArray = ['image' => $imagePath];
+            $img = Image::make($file);
+
+            $img->resize(600, 600, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+
+            $resource = $img->stream()->detach();
+
+            $storagePath = Storage::disk('s3')->put(
+                'profilePic/' . $imageName,
+                $resource,
+                'public'
+            );
+
+            $imageArray = ['image' => $imageName];
         }
 
         auth()->user()->profile->update(array_merge(

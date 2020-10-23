@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-6 offset-1">
-            <img src="/storage/{{ $post->image }}" class="w-100">
+            <img src="https://drinkster-images.s3-us-west-1.amazonaws.com/uploads/{{ $post->image }}" class="w-100">
         </div>
         <div class="col-4">
             <div class="d-flex align-items-center">

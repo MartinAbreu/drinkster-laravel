@@ -29,7 +29,7 @@ class ProfilesController extends Controller
         return view('profiles.index', compact('user', 'follows', 'postCount', 'followersCount', 'followingCount'));
     }
 
-    public function edit(\App\models\User $user)
+    public function edit(\App\Models\User $user)
     {
         $this->authorize('update', $user->profile);
         return view('profiles.edit', compact('user'));

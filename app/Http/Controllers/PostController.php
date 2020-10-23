@@ -58,8 +58,6 @@ class PostController extends Controller
 
             $file = $request->file('image');
 
-            // never has a name conflit
-
             $imageName = uniqid(date('YmdHis')) . '.' . $file->getClientOriginalName();
 
             $img = Image::make($file);
@@ -71,7 +69,7 @@ class PostController extends Controller
 
 
             $resource = $img->stream()->detach();
-            //add public
+
             $storagePath = Storage::disk('s3')->put(
                 'uploads/' . $imageName,
                 $resource,

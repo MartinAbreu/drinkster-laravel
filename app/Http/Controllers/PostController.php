@@ -59,7 +59,7 @@ class PostController extends Controller
         });
 
 
-        $storagePath = Storage::disk('s3')->put(
+        Storage::disk('s3')->put(
             'uploads/' . $image,
             'public'
         );

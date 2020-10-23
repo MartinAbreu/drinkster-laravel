@@ -54,31 +54,41 @@ class PostController extends Controller
             'image' => 'required|image',
         ]);
 
-        $imageName = time() . '.' . $request->image->extension();
+        if ($request->hasFile('image')) {
 
-        $imagePath = $request->image->move(public_path('uploads'), $imageName);
+            $file = $request->file('image');
 
-        $imageS3 = Image::make($imagePath)->resize(600, 600, function ($constraint) {
-            $constraint->aspectRatio();
-            $constraint->upsize();
-        })->save($imageName);
+            // never has a name conflit
+
+            $imageName = uniqid(date('YmdHis')) . '.' . $file->getClientOriginalName();
+
+            $img = Image::make($file);
+
+            $img->resize(600, 600, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
 
 
-        Storage::disk('s3')->put(
-            'uploads/' . $imageS3,
-            'public'
-        );
+            $resource = $img->stream()->detach();
+            //add public
+            $storagePath = Storage::disk('s3')->put(
+                'uploads/' . $imageName,
+                $resource,
+                'public'
+            );
 
-        //create data by auth user
-        auth()->user()->posts()->create([
-            'title' => $data['title'],
-            'caption' => $data['caption'],
-            'ingredients' => $data['ingredients'],
-            'instructions' => $data['instructions'],
-            'image' => $imageName,
-        ]);
+            //create data by auth user
+            auth()->user()->posts()->create([
+                'title' => $data['title'],
+                'caption' => $data['caption'],
+                'ingredients' => $data['ingredients'],
+                'instructions' => $data['instructions'],
+                'image' => $storagePath,
+            ]);
 
-        return redirect('/profile/' . auth()->user()->id);
+            return redirect('/profile/' . auth()->user()->id);
+        }
     }
 
     public function show(\App\Models\Post $post)

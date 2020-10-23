@@ -54,7 +54,7 @@ class PostController extends Controller
         ]);
 
         $image = request('image')->store('uploads', 's3');
-        $imagepath = $image->getClientOriginalName();
+        $imagePath = request('image')->store('uploads', 's3')->getClientOriginalName();
 
         $imageS3 = Image::make($image)->resize(600, 600, function ($constraint) {
             $constraint->aspectRatio();
@@ -73,7 +73,7 @@ class PostController extends Controller
             'caption' => $data['caption'],
             'ingredients' => $data['ingredients'],
             'instructions' => $data['instructions'],
-            'image' => $imagepath,
+            'image' => $imagePath,
         ]);
 
         return redirect('/profile/' . auth()->user()->id);

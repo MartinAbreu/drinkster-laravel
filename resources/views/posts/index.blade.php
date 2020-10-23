@@ -11,7 +11,7 @@
          <div class="col-6 offset-3 pb-2">
              <div class="d-flex align-baseline">
                  <div class="pr-2">
-                     <img src="https://drinkster-images.s3-us-west-1.amazonaws.com/profilePic/{{ $user->profile->image }}" class="w-100 rounded-circle" style="max-width: 15px">
+                     <img src="https://drinkster-images.s3-us-west-1.amazonaws.com/profilePic/{{ $post->user->profile->image }}" class="w-100 rounded-circle" style="max-width: 15px">
                  </div>
                  <div>
                      <span><a href="/profile/{{ $post->user->profile->user_id }}"><strong><span class="text-dark pr-1">{{ $post->user->username }}</span></strong> </a>{{ $post->caption }}</span>

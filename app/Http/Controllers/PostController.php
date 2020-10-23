@@ -65,7 +65,7 @@ class PostController extends Controller
 
 
         Storage::disk('s3')->put(
-            'uploads' . $imageS3,
+            'uploads/' . $imageS3,
             'public'
         );
 

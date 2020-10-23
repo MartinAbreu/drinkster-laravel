@@ -3,10 +3,10 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-6 offset-1">
+        <div class="col-md-6 offset-1">
             <img src="https://drinkster-images.s3-us-west-1.amazonaws.com/uploads/{{ $post->image }}" class="w-100">
         </div>
-        <div class="col-4">
+        <div class="col-md-4">
             <div class="d-flex align-items-center">
                 <div class="d-flex align-items-center">
                     <div class="pr-4">

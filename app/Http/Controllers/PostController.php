@@ -7,6 +7,7 @@ use Intervention\Image\Facades\Image as Image;
 use App\Models\Post as Post;
 
 use App\Models\User as User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -42,7 +43,7 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
         //validate data before creating
         $data = request()->validate([
@@ -53,18 +54,17 @@ class PostController extends Controller
             'image' => 'required|image',
         ]);
 
-        $imagePath = request('image')->getRealpath();
+        $imageName = time() . '.' . $request->image->extension();
 
-        $imageS3 = Image::make(request('image'))->resize(600, 600, function ($constraint) {
+        $image = $request->image->move(public_path('uploads'), $imageName);
+
+        $imageS3 = Image::make($image)->resize(600, 600, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });
 
 
-        Storage::disk('s3')->put(
-            'uploads/' . $imageS3,
-            'public'
-        );
+        $request->image->storeAs('uploads', $imageS3, 's3');
 
         //create data by auth user
         auth()->user()->posts()->create([
@@ -72,7 +72,7 @@ class PostController extends Controller
             'caption' => $data['caption'],
             'ingredients' => $data['ingredients'],
             'instructions' => $data['instructions'],
-            'image' => $imagePath,
+            'image' => $imageName,
         ]);
 
         return redirect('/profile/' . auth()->user()->id);

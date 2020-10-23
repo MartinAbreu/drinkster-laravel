@@ -7,7 +7,7 @@ use Intervention\Image\Facades\Image as Image;
 use App\Models\Post as Post;
 
 use App\Models\User as User;
-
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -53,9 +53,7 @@ class PostController extends Controller
             'image' => 'required|image',
         ]);
 
-        $imagePath = request('image')->store('uploads', 's3');
-
-        $image = Image::make($imagePath)->resize(600, 600, function ($constraint) {
+        $image = Image::make(request('image'))->resize(600, 600, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });

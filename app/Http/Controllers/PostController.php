@@ -53,16 +53,17 @@ class PostController extends Controller
             'image' => 'required|image',
         ]);
 
-        $imagepath = request('image');;
+        $image = request('image');
+        $imagepath = request('image')->getClientOriginalName();
 
-        $image = Image::make($imagepath)->resize(600, 600, function ($constraint) {
+        $imageS3 = Image::make($image)->resize(600, 600, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });
 
 
         Storage::disk('s3')->put(
-            'uploads/' . $image,
+            'uploads/' . $imageS3,
             'public'
         );
 

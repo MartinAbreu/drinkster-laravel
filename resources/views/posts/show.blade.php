@@ -23,7 +23,7 @@
             <hr>
             <div class="d-flex">
                 <div class="pr-2">
-                    <img src="https://drinkster-images.s3-us-west-1.amazonaws.com/profilePic/{{ Auth()->user()->profile->image }}" class="w-100 rounded-circle" style="max-width: 7rem">
+                    <img src="https://drinkster-images.s3-us-west-1.amazonaws.com/profilePic/{{ user()->profile->image }}" class="w-100 rounded-circle" style="max-width: 7rem">
                 </div>
                 <div>
                     <a href="/profile/{{ $post->user->profile->user_id }}"><strong><span class="text-dark pr-1">{{ $post->user->username }}</span></strong></a>

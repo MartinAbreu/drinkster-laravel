@@ -58,7 +58,7 @@ class PostController extends Controller
         $image = Image::make($imagepath)->resize(600, 600, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
-        })->stream();
+        });
 
 
         Storage::disk('s3')->put(

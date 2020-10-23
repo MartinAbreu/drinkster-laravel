@@ -53,14 +53,14 @@ class PostController extends Controller
             'image' => 'required|image',
         ]);
 
-        $imagePath = request('image')->store('uploads', 'public');
+        $imagePath = request('image')->store('uploads', 's3');
 
         $image = Image::make(storage_path("storage/{$imagePath}"))->resize(600, 600, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });
 
-        $image->save();
+        $image->stream();
 
         //create data by auth user
         auth()->user()->posts()->create([

@@ -84,7 +84,7 @@ class PostController extends Controller
                 'caption' => $data['caption'],
                 'ingredients' => $data['ingredients'],
                 'instructions' => $data['instructions'],
-                'image' => $storagePath,
+                'image' => $img,
             ]);
 
             return redirect('/profile/' . auth()->user()->id);

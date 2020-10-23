@@ -9,7 +9,7 @@
         <a class="btn btn-primary btn-lg" href="/register" role="button">Sign Up</a>
        </div>
        <div class="col-6 d-flex justify-content-center">
-           <img src="/storage/img/cocktailLanding.png" style="max-width: 75%">
+           <img src="https://drinkster-images.s3-us-west-1.amazonaws.com/appImages/cocktailLanding.png" style="max-width: 75%">
        </div>
    </div>
 </div>

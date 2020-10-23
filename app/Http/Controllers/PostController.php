@@ -70,7 +70,7 @@ class PostController extends Controller
             'caption' => $data['caption'],
             'ingredients' => $data['ingredients'],
             'instructions' => $data['instructions'],
-            'image' => $imagePath,
+            'image' => $storagePath,
         ]);
 
         return redirect('/profile/' . auth()->user()->id);

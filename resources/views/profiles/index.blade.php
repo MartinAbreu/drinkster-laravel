@@ -45,7 +45,7 @@
 
             <div class="card" style="width: 16rem;">
                 <a href="/p/{{ $post->id }}">
-                    <img class="card-img-top" src="https://drinkster-images.s3-us-west-1.amazonaws.com/uploads/{{ $post->image }}" alt="Card image cap">
+                    <img class="card-img-top" src="https://drinkster-images.s3-us-west-1.amazonaws.com/uploads/{{ $post->image }}" alt="Card image">
                 </a>
                 <div class="card-body">
                 <h5 class="card-title">{{ $post->title }}</h5>

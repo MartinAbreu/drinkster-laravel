@@ -53,7 +53,9 @@ class PostController extends Controller
             'image' => 'required|image',
         ]);
 
-        $image = Image::make(request('image'))->resize(600, 600, function ($constraint) {
+        $imagepath = request('image')->store('uploads', 's3');
+
+        $image = Image::make($imagepath)->resize(600, 600, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });
@@ -70,7 +72,7 @@ class PostController extends Controller
             'caption' => $data['caption'],
             'ingredients' => $data['ingredients'],
             'instructions' => $data['instructions'],
-            'image' => $image,
+            'image' => $imagepath,
         ]);
 
         return redirect('/profile/' . auth()->user()->id);

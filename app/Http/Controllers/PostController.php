@@ -56,15 +56,18 @@ class PostController extends Controller
 
         $imageName = time() . '.' . $request->image->extension();
 
-        $image = $request->image->move(public_path('uploads'), $imageName);
+        $request->image->move(public_path('uploads'), $imageName);
 
-        $imageS3 = Image::make($image)->resize(600, 600, function ($constraint) {
+        $imageS3 = Image::make($imageName)->resize(600, 600, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });
 
 
-        $request->image->storeAs('uploads', $imageS3, 's3');
+        Storage::disk('s3')->put(
+            'uploads/' . $imageS3,
+            'public'
+        );
 
         //create data by auth user
         auth()->user()->posts()->create([
@@ -72,7 +75,7 @@ class PostController extends Controller
             'caption' => $data['caption'],
             'ingredients' => $data['ingredients'],
             'instructions' => $data['instructions'],
-            'image' => $imageName,
+            'image' => $imagePath,
         ]);
 
         return redirect('/profile/' . auth()->user()->id);

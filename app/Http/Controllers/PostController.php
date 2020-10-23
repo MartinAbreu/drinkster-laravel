@@ -56,9 +56,9 @@ class PostController extends Controller
 
         $imageName = time() . '.' . $request->image->extension();
 
-        $request->image->move(public_path('uploads'), $imageName);
+        $imagePath = $request->image->move(public_path('uploads'), $imageName);
 
-        $imageS3 = Image::make($imageName)->resize(600, 600, function ($constraint) {
+        $imageS3 = Image::make($imagePath)->resize(600, 600, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });
@@ -75,7 +75,7 @@ class PostController extends Controller
             'caption' => $data['caption'],
             'ingredients' => $data['ingredients'],
             'instructions' => $data['instructions'],
-            'image' => $imagePath,
+            'image' => $imageName,
         ]);
 
         return redirect('/profile/' . auth()->user()->id);

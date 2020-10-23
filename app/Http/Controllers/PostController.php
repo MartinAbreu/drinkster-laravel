@@ -64,7 +64,7 @@ class PostController extends Controller
         });
 
 
-        $request->image->storeAs('uploads', $imageName, 's3');
+        $request->image->storeAs('uploads', $imageS3, 's3');
 
         //create data by auth user
         auth()->user()->posts()->create([

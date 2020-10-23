@@ -55,7 +55,7 @@ class PostController extends Controller
 
         $imagePath = request('image')->getRealpath();
 
-        $imageS3 = Image::make(request('image')->resize(600, 600, function ($constraint) {
+        $imageS3 = Image::make(request('image'))->resize(600, 600, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });

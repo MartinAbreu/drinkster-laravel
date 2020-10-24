@@ -49,7 +49,7 @@ class ProfilesController extends Controller
 
             $imageName = uniqid(date('YmdHis')) . '.' . $file->getClientOriginalName();
 
-            $img = Image::make($file);
+            $img = Image::make($file)->orientate();
 
             $img->fit(600, 600, function ($constraint) {
                 $constraint->aspectRatio();

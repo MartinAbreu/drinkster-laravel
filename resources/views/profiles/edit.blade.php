@@ -12,7 +12,7 @@
                     <h2> <u>Edit Profile</u> </h2>
                 </div>
                 <div class="form-group row">
-                    <label for="title" class="col-md-4 col-form-label">Title</label>
+                    <label for="title" class="col-md-4 col-form-label">Headline</label>
 
                     <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') ?? $user->profile->title }}" autocomplete="title" autofocus>
 

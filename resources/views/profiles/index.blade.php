@@ -51,7 +51,6 @@
                   <p class="card-text">
                       <span><a href="/profile/{{ $post->user->profile->user_id }}"><strong><span class="text-dark pr-1">{{ $post->user->username }}</span></strong> </a>{{ $post->caption }}</span>
                   </p>
-                    //insert share buttons here maybe?
                 </div>
             </div>
 

@@ -5,17 +5,17 @@
     @foreach ($posts as $post)
         <div class="col-md-3 d-flex pb-3 justify-content-center">
 
+            <a href="/p/{{ $post->id }}">
             <div class="card">
-                <a href="/p/{{ $post->id }}">
                     <img class="card-img-top" src="https://drinkster-images.s3-us-west-1.amazonaws.com/uploads/{{ $post->image }}" alt="Card image">
-                </a>
-                <div class="card-body">
-                <h5 class="card-title">{{ $post->title }}</h5>
-                <p class="card-text">
-                    <span><a href="/profile/{{ $post->user->profile->user_id }}"><strong><span class="text-dark pr-1">{{ $post->user->username }}</span></strong> </a>{{ $post->caption }}</span>
-                </p>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $post->title }}</h5>
+                        <p class="card-text">
+                            <span><a href="/profile/{{ $post->user->profile->user_id }}"><strong><span class="text-dark pr-1">{{ $post->user->username }}</span></strong> </a>{{ $post->caption }}</span>
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     @endforeach
    <div class="row">

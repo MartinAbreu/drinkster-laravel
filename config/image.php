@@ -17,5 +17,6 @@ return [
 
     'driver' => 'gd',
     'upload_max_filesize' => '-1',
+    'memory_limit' => '-1'
 
 ];

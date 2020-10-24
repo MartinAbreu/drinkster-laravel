@@ -51,7 +51,7 @@ class ProfilesController extends Controller
 
             $img = Image::make($file);
 
-            $img->resize(600, 600, function ($constraint) {
+            $img->resize(300, 300, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });

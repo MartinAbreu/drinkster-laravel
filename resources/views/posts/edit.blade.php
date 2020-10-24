@@ -38,7 +38,7 @@
                 <div class="form-group row">
                     <label for="ingredients" class="col-md-4 col-form-label">Ingredients</label>
 
-                    <textarea id="ingredients" type="text" class="form-control @error('ingredients') is-invalid @enderror" name="ingredients" value="{{ old('ingredients') ?? $post->ingredients }}" autocomplete="ingredients" maxlength="255" autofocus>{{ old('ingredients') ?? $post->ingredients }}</textarea>
+                    <textarea id="ingredients" type="text" class="form-control @error('ingredients') is-invalid @enderror" name="ingredients" value="{{ old('ingredients') ?? $post->ingredients }}" autocomplete="ingredients" maxlength="255" rows="4" autofocus>{{ old('ingredients') ?? $post->ingredients }}</textarea>
 
                     @error('ingredients')
                     <span class="invalid-feedback" role="alert">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="form-group row">
                     <label for="instructions" class="col-md-4 col-form-label">Instructions</label>
-                        <textarea id="instructions" type="textarea" class="form-control @error('instructions') is-invalid @enderror" name="instructions" value="{{ old('instructions') ?? $post->instructions }}" autocomplete="instructions" maxlength="255" autofocus>{{ old('instructions') ?? $post->instructions }}</textarea>
+                        <textarea id="instructions" type="textarea" class="form-control @error('instructions') is-invalid @enderror" name="instructions" value="{{ old('instructions') ?? $post->instructions }}" autocomplete="instructions" maxlength="255" rows="4" autofocus>{{ old('instructions') ?? $post->instructions }}</textarea>
 
                     @error('instructions')
                     <span class="invalid-feedback" role="alert">

@@ -51,12 +51,12 @@ class ProfilesController extends Controller
 
             $img = Image::make($file);
 
-            $img->resize(300, 300, function ($constraint) {
+            $img->fit(600, 600, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
 
-            $resource = $img->orientate()->stream()->detach();
+            $resource = $img->stream()->detach();
 
 
             $storagePath = Storage::disk('s3')->put(

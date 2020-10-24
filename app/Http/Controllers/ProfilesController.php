@@ -45,11 +45,11 @@ class ProfilesController extends Controller
         ]);
 
         if (request('image')) {
-            $file = $request->file('image');
+            $file = $request->file('image')->orientate();
 
             $imageName = uniqid(date('YmdHis')) . '.' . $file->getClientOriginalName();
 
-            $img = Image::make($file)->orientate();
+            $img = Image::make($file);
 
             $img->fit(600, 600, function ($constraint) {
                 $constraint->aspectRatio();

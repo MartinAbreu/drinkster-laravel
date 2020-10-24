@@ -54,7 +54,9 @@ class ProfilesController extends Controller
             $img->resize(300, 300, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
-            })->orientate();
+            });
+
+            $img->orientate();
 
             $resource = $img->stream()->detach();
 

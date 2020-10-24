@@ -16,6 +16,6 @@ return [
     */
 
     'driver' => 'gd',
-    'upload_max_filesize' => '4M',
+    'upload_max_filesize' => '-1',
 
 ];

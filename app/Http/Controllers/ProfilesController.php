@@ -56,9 +56,8 @@ class ProfilesController extends Controller
                 $constraint->upsize();
             });
 
-            $img->orientate();
+            $resource = $img->orientate()->stream()->detach();
 
-            $resource = $img->stream()->detach();
 
             $storagePath = Storage::disk('s3')->put(
                 'profilePic/' . $imageName,

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row row justify-content-center">
-    <div class="col-md-3 pt-3 d-flex align-items-center justify-content-center"><img class="rounded-circle" src="https://drinkster-images.s3-us-west-1.amazonaws.com/profilePic/{{ $user->profile->image }}" style="max-height: 175px"></div>
+    <div class="col-md-3 pt-3 d-flex align-items-center justify-content-center"><img class="rounded-circle" src="https://drinkster-images.s3-us-west-1.amazonaws.com/profilePic/{{ $user->profile->image ?? 'userDefault.png' }}" style="max-height: 175px"></div>
         <div class="col-md-5 pt-3">
             <div class="d-flex justify-content-between align-items-baseline">
                 <div class="d-flex align-items-center">

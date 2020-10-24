@@ -30,7 +30,7 @@
 @else
     <div class="container w-100">
         <div class="jumbotron">
-            <h1 class="display-4">Ooops!</h1>
+            <h1 class="display-4">It's Quiet In Here...</h1>
             <p class="lead">Seems you don't have any drinking buddies.</p>
             <hr class="my-4">
             <h5>Discover other Drinksters so you won't be lonely.</h5>

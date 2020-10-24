@@ -6,7 +6,7 @@ use Intervention\Image\Facades\Image as Image;
 use Illuminate\Support\Facades\Cache as Cache;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use Intervention\Image\Commands\OrientateCommand;
 
 class ProfilesController extends Controller
 {
@@ -54,7 +54,7 @@ class ProfilesController extends Controller
             $img->resize(300, 300, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
-            });
+            })->orientate();
 
             $resource = $img->stream()->detach();
 

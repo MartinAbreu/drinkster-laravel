@@ -45,7 +45,7 @@ class ProfilesController extends Controller
         ]);
 
         if (request('image')) {
-            $file = $request->file('image')->orientate();
+            $file = $request->file('image');
 
             $imageName = uniqid(date('YmdHis')) . '.' . $file->getClientOriginalName();
 

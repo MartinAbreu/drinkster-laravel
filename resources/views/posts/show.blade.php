@@ -7,8 +7,8 @@
             <img src="https://drinkster-images.s3-us-west-1.amazonaws.com/uploads/{{ $post->image }}" class="w-100">
         </div>
         <div class="col-md-4">
-            <div class="d-flex align-items-center">
-                <div class="d-flex align-items-center">
+            <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center pt-3">
                     <div class="pr-4">
                         <h3 class="card-title display-5">{{ $post->title }}</h3>
                     </div>
@@ -25,9 +25,11 @@
                 <div class="pr-2">
                     <img src="https://drinkster-images.s3-us-west-1.amazonaws.com/profilePic/{{ $post->user->profile->image }}" class="w-100 rounded-circle" style="max-width: 7rem">
                 </div>
-                <div>
-                    <a href="/profile/{{ $post->user->profile->user_id }}"><strong><span class="text-dark pr-1">{{ $post->user->username }}</span></strong></a>
-                    <p>{{ $post->caption }}</p>
+                <div class="d-flex align-items-center">
+                    <div>
+                        <a href="/profile/{{ $post->user->profile->user_id }}"><strong><span class="text-dark pr-1">{{ $post->user->username }}</span></strong></a>
+                        <p>{{ $post->caption }}</p>
+                    </div>
                 </div>
             </div>
             <hr/>
